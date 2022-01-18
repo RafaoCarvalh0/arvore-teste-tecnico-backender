@@ -17,7 +17,7 @@ config :arvore_repli, ArvoreRepli.Repo,
 # you can enable the server option below.
 config :arvore_repli, ArvoreRepliWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "rNSc4lYa1qJDMJwBYIeCF67ArFgiA3aa0B0A7uWMv2kGVhU32WVNzgD1QtbVR+0w",
+  secret_key_base: "xsYNYi6q+46RTqsw81J1mxVHOhzoYow6juPoeuWoHEtrZ9uEbIIMeB3Xk4kPlvbz",
   server: false
 
 # In test we don't send emails.

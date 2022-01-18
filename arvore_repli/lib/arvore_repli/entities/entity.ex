@@ -1,20 +1,20 @@
-defmodule ArvoreRepli.Networks.Network do
+defmodule ArvoreRepli.Entities.Entity do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "networks" do
+  schema "entities" do
     field :entity_type, :string
     field :inep, :string
     field :name, :string
-    field :parent_id, :string
+    field :parent_id, :integer
 
     timestamps()
   end
 
   @doc false
-  def changeset(network, attrs) do
-    network
+  def changeset(entity, attrs) do
+    entity
     |> cast(attrs, [:name, :entity_type, :inep, :parent_id])
-    |> validate_required([:name, :entity_type, :inep, :parent_id])
+    |> validate_required([:name, :entity_type])
   end
 end

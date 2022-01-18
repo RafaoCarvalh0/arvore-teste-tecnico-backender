@@ -13,9 +13,9 @@ config :arvore_repli,
 # Configures the endpoint
 config :arvore_repli, ArvoreRepliWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: ArvoreRepliWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [view: ArvoreRepliWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: ArvoreRepli.PubSub,
-  live_view: [signing_salt: "Wafmyd8X"]
+  live_view: [signing_salt: "R8Mrh/Qy"]
 
 # Configures the mailer
 #

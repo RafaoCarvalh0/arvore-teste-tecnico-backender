@@ -22,7 +22,7 @@ config :arvore_repli, ArvoreRepliWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "HekAwzpMkzUQUSCXtS4jmeRxDloP/JGqqxEHSPtsotllN2BM58RktVXUOhJlN3xf",
+  secret_key_base: "ibSYZ+vXNZV0dk5FUVokjpi8ocLrKyxU1LXL4H0qI6f5iABctCmovxWJZoGnWEE/",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
@@ -51,17 +51,6 @@ config :arvore_repli, ArvoreRepliWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-
-# Watch static and templates for browser reloading.
-config :arvore_repli, ArvoreRepliWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/arvore_repli_web/(live|views)/.*(ex)$",
-      ~r"lib/arvore_repli_web/templates/.*(eex)$"
-    ]
-  ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
