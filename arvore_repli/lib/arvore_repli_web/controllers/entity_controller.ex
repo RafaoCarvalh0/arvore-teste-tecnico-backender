@@ -16,15 +16,15 @@ defmodule ArvoreRepliWeb.EntityController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.entity_path(conn, :show, entity))
-      |> render("show.json", entity: entity)
+      |> render("entity.json", entity: entity, subtree: [])
     end
   end
 
   def show(conn, %{"id" => id}) do
     entity = Entities.get_entity!(id)
-    subtree = Entities.get_subtree!(id, entity.entity_type) ## Already an array - Working properly
+    subtree = Entities.get_subtree!(id, entity.entity_type)
 
-    render("entity.json", entity: entity, subree: subtree) ## Need to check how to pass entities + subtree to render
+    render(conn, "entity.json", entity: entity, subtree: subtree)
 
   end
 
