@@ -50,15 +50,30 @@ defmodule ArvoreRepli.Entities do
 
   """
 
-  ## Find A better way to do these queries
   def get_subtree!(id, entity_type) do
     cond do
       entity_type == "network" ->
-        ## Ecto.Adapters.SQL.query!(Arvore.Repo, "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'" , [id])
+        ## "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'"
+        query = from e in "entities",
+        where: e.parent_id == ^id and e.entity_type == "school",
+        select: e.id
+
+        Repo.all(query)
       entity_type == "school" ->
-        ## Ecto.Adapters.SQL.query!(Arvore.Repo, "SELECT id from entities WHERE parent_id = ? AND (entity_type = 'network' OR entity_type = 'class')", [id])
+        ## "SELECT id from entities WHERE parent_id = ? AND (entity_type = 'network' OR entity_type = 'class'"
+        query = from e in "entities",
+        where: e.parent_id == ^id and (e.entity_type == "network" or e.entity_type == "class"),
+        select: e.id
+
+        Repo.all(query)
       entity_type == "class" ->
-        ## Ecto.Adapters.SQL.query!(Arvore.Repo, "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'" , [id])
+        ## "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'"
+        query = from e in "entities",
+        where: e.parent_id == ^id and e.entity_type == "school",
+        select: e.id
+
+        Repo.all(query)
+
     end
 
   end

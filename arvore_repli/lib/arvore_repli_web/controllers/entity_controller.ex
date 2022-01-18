@@ -22,21 +22,10 @@ defmodule ArvoreRepliWeb.EntityController do
 
   def show(conn, %{"id" => id}) do
     entity = Entities.get_entity!(id)
-    get_subtree = Entities.get_subtree!(id, entity.entity_type)
-    new_subtree = get_subtree.rows
-    subtree = Enum.map(subtree, fn [ids] -> ids end)
+    subtree = Entities.get_subtree!(id, entity.entity_type) ## Already an array - Working properly
 
-    with {:ok, %Entity{} = entity} <- Entities.update_entity(entity, entity_params) do
-      json(conn, %{
-        id: entity.id,
-        name: entity.name,
-        entity_type: entity.entity_type,
-        inep: entity.inep,
-        parent_id: entity.parent_id,
-        subtree_ids: subtree
-      })
-      render(conn, "show.json", entity: entity)
-    end
+    render("entity.json", entity: entity, subree: subtree) ## Need to check how to pass entities + subtree to render
+
   end
 
   def update(conn, %{"id" => id, "entity" => entity_params}) do
