@@ -16,23 +16,22 @@ defmodule ArvoreRepliWeb.EntityController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.entity_path(conn, :show, entity))
-      |> render("entity.json", entity: entity, subtree: [])
+      |> render("entity.json", entity: entity, subtree: Entities.get_subtree!(entity, entity.entity_type))
     end
   end
 
   def show(conn, %{"id" => id}) do
     entity = Entities.get_entity!(id)
-    subtree = Entities.get_subtree!(id, entity.entity_type)
-
+    subtree = Entities.get_subtree!(entity, entity.entity_type)
     render(conn, "entity.json", entity: entity, subtree: subtree)
-
   end
 
   def update(conn, %{"id" => id, "entity" => entity_params}) do
     entity = Entities.get_entity!(id)
 
     with {:ok, %Entity{} = entity} <- Entities.update_entity(entity, entity_params) do
-      render(conn, "show.json", entity: entity)
+      subtree = Entities.get_subtree!(entity, entity.entity_type)
+      render(conn, "entity.json", entity: entity, subtree: subtree)
     end
   end
 

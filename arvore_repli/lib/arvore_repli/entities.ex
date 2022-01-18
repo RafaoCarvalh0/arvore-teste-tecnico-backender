@@ -55,21 +55,19 @@ defmodule ArvoreRepli.Entities do
       entity_type == "network" ->
         ## "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'"
         query = from e in "entities",
-        where: e.parent_id == ^id and e.entity_type == "school",
+        where: e.parent_id == ^id.id and e.entity_type == "school",
         select: e.id
 
         Repo.all(query)
       entity_type == "school" ->
-        ## "SELECT id from entities WHERE parent_id = ? AND (entity_type = 'network' OR entity_type = 'class'"
         query = from e in "entities",
-        where: e.parent_id == ^id and (e.entity_type == "network" or e.entity_type == "class"),
+        where: ((e.id == ^id.parent_id and e.entity_type == "network") or (e.entity_type == "class" and e.parent_id == ^id.id)),
         select: e.id
 
         Repo.all(query)
       entity_type == "class" ->
-        ## "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'"
         query = from e in "entities",
-        where: e.parent_id == ^id and e.entity_type == "school",
+        where: e.id == ^id.parent_id and e.entity_type == "school",
         select: e.id
 
         Repo.all(query)
