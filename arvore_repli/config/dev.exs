@@ -2,9 +2,9 @@ import Config
 
 # Configure your database
 config :arvore_repli, ArvoreRepli.Repo,
-  username: "root",
+  username: "admin",
   password: "15975301",
-  hostname: "localhost",
+  hostname: "teste-arvore.ci69s4prikjt.sa-east-1.rds.amazonaws.com",
   database: "arvore_repli_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
