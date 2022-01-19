@@ -6,9 +6,9 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :arvore_repli, ArvoreRepli.Repo,
-  username: "root",
-  password: "",
-  hostname: "localhost",
+  username: System.get_env("TEST_DB_USERNAME"),
+  password: System.get_env("TEST_DB_PASSWORD"),
+  hostname: System.get_env("TEST_DB_HOSTNAME"),
   database: "arvore_repli_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
