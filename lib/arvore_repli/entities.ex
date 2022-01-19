@@ -52,6 +52,8 @@ defmodule ArvoreRepli.Entities do
 
   def get_subtree!(id, entity_type) do
     cond do
+      id.parent_id == nil ->
+        []
       entity_type == "network" ->
         ## "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'"
         query = from e in "entities",
