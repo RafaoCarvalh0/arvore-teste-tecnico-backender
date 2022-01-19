@@ -28,9 +28,8 @@ defmodule ArvoreRepliWeb.EntityController do
 
   def update(conn, %{"id" => id, "entity" => entity_params}) do
     entity = Entities.get_entity!(id)
-    subtree = Entities.get_subtree!(entity, entity.entity_type)
     with {:ok, %Entity{} = entity} <- Entities.update_entity(entity, entity_params) do
-      render(conn, "entity.json", entity: entity, subtree: subtree)
+      render(conn, "entity.json", entity: entity, subtree: Entities.get_subtree!(entity, entity.entity_type))
     end
   end
 
