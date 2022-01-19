@@ -112,7 +112,7 @@ Response:
 ------------
  * Retornar uma entidade específica por ID:
 
-Request - GET: [http://18.229.134.86:4000/api/entities/](http://18.229.134.86:4000/api/entities/:id)<idDaEntidade>
+Request - GET: [http://18.229.134.86:4000/api/entities/idDaEntidade](http://18.229.134.86:4000/api/entities/:id)
 
 Response:
 ```json
@@ -138,7 +138,7 @@ Response:
 ------------
    * Atualizar os dados de uma entidade. Obs.: Dados para atualização devem ser enviados no body, como demonstrado logo abaixo.
 
-Request - PUT: [http://18.229.134.86:4000/api/entities/](http://18.229.134.86:4000/api/entities/:id)<idDaEntidade>
+Request - PUT: [http://18.229.134.86:4000/api/entities/idDaEntidade](http://18.229.134.86:4000/api/entities/:id)
 ```json
    {
     "entity": {
