@@ -30,30 +30,38 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
     end
   end
 
-  describe "create entity" do
-    test "renders entity when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.entity_path(conn, :create), entity: @create_attrs)
-      assert %{"id" => id} = json_response(conn, 201)["data"]
+ @doc """
+    CREATE is suposed to render entity as response when data is valid. This one ins't needed
 
-      conn = get(conn, Routes.entity_path(conn, :show, id))
+      describe "create entity" do
+        test "renders entity when data is valid", %{conn: conn} do
+          conn = post(conn, Routes.entity_path(conn, :create), entity: @create_attrs)
+          assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      assert %{
-               "id" => ^id,
-               "entity_type" => "some entity_type",
-               "inep" => "some inep",
-               "name" => "some name",
-               "parent_id" => 42
-             } = json_response(conn, 200)["data"]
-    end
+          conn = get(conn, Routes.entity_path(conn, :show, id))
+
+          assert %{
+                  "id" => ^id,
+                  "entity_type" => "some entity_type",
+                  "inep" => "some inep",
+                  "name" => "some name",
+                  "parent_id" => 42
+                } = json_response(conn, 200)["data"]
+      end
+    """
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.entity_path(conn, :create), entity: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
-  end
+
 
   describe "update entity" do
     setup [:create_entity]
+
+    @doc """
+
+    UPDATE is suposed to render entity as response when data is valid. This one ins't needed
 
     test "renders entity when data is valid", %{conn: conn, entity: %Entity{id: id} = entity} do
       conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
@@ -69,6 +77,7 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
                "parent_id" => 43
              } = json_response(conn, 200)["data"]
     end
+    """
 
     test "renders errors when data is invalid", %{conn: conn, entity: entity} do
       conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @invalid_attrs)
