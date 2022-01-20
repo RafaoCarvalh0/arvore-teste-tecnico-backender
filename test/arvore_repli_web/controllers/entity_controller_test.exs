@@ -30,10 +30,17 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
     end
   end
 
- @doc """
-    CREATE is suposed to render entity as response when data is valid. This one ins't needed
 
-      describe "create entity" do
+  describe "create entity" do
+
+    test "renders errors when entity_type is != network, school or class", %{conn: conn, entity: entity} do
+      conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+
+     @doc """
+        CREATE is suposed to render entity as response when data is valid. This one ins't needed
+
         test "renders entity when data is valid", %{conn: conn} do
           conn = post(conn, Routes.entity_path(conn, :create), entity: @create_attrs)
           assert %{"id" => id} = json_response(conn, 201)["data"]
@@ -49,6 +56,8 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
                 } = json_response(conn, 200)["data"]
       end
     """
+
+  end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.entity_path(conn, :create), entity: @invalid_attrs)
@@ -76,13 +85,19 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
                "name" => "some updated name",
                "parent_id" => 43
              } = json_response(conn, 200)["data"]
-    end
-    """
+      end
+      """
 
     test "renders errors when data is invalid", %{conn: conn, entity: entity} do
       conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
+
+    test "renders errors when entity_type is != network, school or class", %{conn: conn, entity: entity} do
+      conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+
   end
 
   describe "delete entity" do
