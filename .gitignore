@@ -34,3 +34,4 @@ npm-debug.log
 
 tasks.txt
 .env*
+.env
