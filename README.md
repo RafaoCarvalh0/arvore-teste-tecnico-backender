@@ -13,17 +13,17 @@ A modelagem deverá utilizar apenas uma entidade (Entity), que poderá represent
   * Elixir + Erlang + Phoenyx framework
 
 **Requisitos Mínimos:**
-- Documentação do repositório git [x]
-- Histórico de commits [x]
-- Testes unitários [x]
+- [x] Documentação do repositório git 
+- [x] Histórico de commits
+- [x] Testes unitários
 
 **Requisitos Desejáveis:**
-- Deploy em qualquer serviço para consumo durante avaliação [x]
+- [x] Deploy em qualquer serviço para consumo durante avaliação 
 
 ***Bônus (Além do requisitado)***:
 - Separação de ambientes:
-  1. AWS EC2: Possui somente a aplicação e seus componentes instalados[x]
-  2. AWS RDS: Banco de dados em nuvem conectado com a aplicação [x]
+  - [x] AWS EC2: Possui somente a aplicação e seus componentes instalados
+  - [x] AWS RDS: Banco de dados em nuvem conectado com a aplicação 
 
 ----
 
@@ -112,7 +112,7 @@ Response:
 ------------
  * Retornar uma entidade específica por ID:
 
-Request - GET: [http://18.229.134.86:4000/api/entities/<idDaEntidade>](http://18.229.134.86:4000/api/entities/:id) 
+Request - GET: [http://18.229.134.86:4000/api/entities/idDaEntidade](http://18.229.134.86:4000/api/entities/:id)
 
 Response:
 ```json
@@ -138,7 +138,7 @@ Response:
 ------------
    * Atualizar os dados de uma entidade. Obs.: Dados para atualização devem ser enviados no body, como demonstrado logo abaixo.
 
-Request - PUT: [http://18.229.134.86:4000/api/entities/<idDaEntidade>](http://18.229.134.86:4000/api/entities/:id)
+Request - PUT: [http://18.229.134.86:4000/api/entities/idDaEntidade](http://18.229.134.86:4000/api/entities/:id)
 ```json
    {
     "entity": {
