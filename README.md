@@ -33,7 +33,7 @@ A modelagem deverá utilizar apenas uma entidade (Entity), que poderá represent
   * 2. Na raiz do projeto, execute `mix deps.get` para instalar todas as dependências
   * 3. Ainda na raiz do projeto, abra e configure o arquivo `.env` (instruções contidas no próprio arquivo)
   * 4. Após configurado o arquivo `.env` crie e migre o banco de dados com `mix ecto.setup` (na raiz do projeto)
-  * 5. Execute o comando `source .env.dev && mix phx.server` para executar o servidor com as configurações realizadas no arquivo `.env`
+  * 5. Execute o comando `source .env && mix phx.server` para executar o servidor com as configurações realizadas no arquivo `.env`
   *  Obs.: Execute o comando `source .env && mix test` na raiz do projeto para execução dos testes
 
 Se tudo estiver corretamente configurado, o servidor estará pronto para uso.
