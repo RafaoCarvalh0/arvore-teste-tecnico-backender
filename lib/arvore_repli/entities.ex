@@ -82,8 +82,6 @@ defmodule ArvoreRepli.Entities do
 
         Repo.all(query)
 
-        id.parent_id == nil ->
-          []
     end
   end
 
