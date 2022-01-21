@@ -30,15 +30,17 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
     end
   end
 
-
   describe "create entity" do
-
-    test "renders errors when entity_type is != network, school or class", %{conn: conn, entity: entity} do
-      conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+    test "Bad Request (400) when entity_type is != network, school or class", %{
+      conn: conn
+    } do
+      conn = post(conn, Routes.entity_path(conn, :create), entity: @create_attrs)
+      assert %{
+          "detail" => "Bad Request"
+      } = json_response(conn, 400)["errors"]
     end
 
-     @doc """
+    @doc """
         CREATE is suposed to render entity as response when data is valid. This one ins't needed
 
         test "renders entity when data is valid", %{conn: conn} do
@@ -56,14 +58,12 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
                 } = json_response(conn, 200)["data"]
       end
     """
-
   end
 
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.entity_path(conn, :create), entity: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
-    end
-
+  test "renders errors when data is invalid", %{conn: conn} do
+    conn = post(conn, Routes.entity_path(conn, :create), entity: @invalid_attrs)
+    assert json_response(conn, 400)["errors"] != %{}
+  end
 
   describe "update entity" do
     setup [:create_entity]
@@ -73,31 +73,35 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
     UPDATE is suposed to render entity as response when data is valid. This one ins't needed
 
     test "renders entity when data is valid", %{conn: conn, entity: %Entity{id: id} = entity} do
-      conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
-      assert %{"id" => ^id} = json_response(conn, 200)["data"]
+    conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
+    assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, Routes.entity_path(conn, :show, id))
+    conn = get(conn, Routes.entity_path(conn, :show, id))
 
-      assert %{
-               "id" => ^id,
-               "entity_type" => "some updated entity_type",
-               "inep" => "some updated inep",
-               "name" => "some updated name",
-               "parent_id" => 43
-             } = json_response(conn, 200)["data"]
-      end
-      """
+    assert %{
+             "id" => ^id,
+             "entity_type" => "some updated entity_type",
+             "inep" => "some updated inep",
+             "name" => "some updated name",
+             "parent_id" => 43
+           } = json_response(conn, 200)["data"]
+    end
+    """
 
     test "renders errors when data is invalid", %{conn: conn, entity: entity} do
       conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      assert json_response(conn, 400)["errors"] != %{}
     end
 
-    test "renders errors when entity_type is != network, school or class", %{conn: conn, entity: entity} do
+    test "Bad Request (400) when entity_type is != network, school or class", %{
+      conn: conn,
+      entity: entity
+    } do
       conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      assert %{
+        "detail" => "Bad Request"
+      } = json_response(conn, 400)["errors"]
     end
-
   end
 
   describe "delete entity" do

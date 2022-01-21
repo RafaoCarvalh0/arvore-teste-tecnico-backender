@@ -54,28 +54,34 @@ defmodule ArvoreRepli.Entities do
     cond do
       id.parent_id == nil ->
         []
+
       entity_type == "network" ->
         ## "SELECT id from entities WHERE parent_id = ? AND entity_type = 'school'"
-        query = from e in "entities",
-        where: e.parent_id == ^id.id and e.entity_type == "school",
-        select: e.id
+        query =
+          from e in "entities",
+            where: e.parent_id == ^id.id and e.entity_type == "school",
+            select: e.id
 
         Repo.all(query)
+
       entity_type == "school" ->
-        query = from e in "entities",
-        where: ((e.id == ^id.parent_id and e.entity_type == "network") or (e.entity_type == "class" and e.parent_id == ^id.id)),
-        select: e.id
+        query =
+          from e in "entities",
+            where:
+              (e.id == ^id.parent_id and e.entity_type == "network") or
+                (e.entity_type == "class" and e.parent_id == ^id.id),
+            select: e.id
 
         Repo.all(query)
+
       entity_type == "class" ->
-        query = from e in "entities",
-        where: e.id == ^id.parent_id and e.entity_type == "school",
-        select: e.id
+        query =
+          from e in "entities",
+            where: e.id == ^id.parent_id and e.entity_type == "school",
+            select: e.id
 
         Repo.all(query)
-
     end
-
   end
 
   def create_entity(attrs \\ %{}) do
@@ -130,5 +136,4 @@ defmodule ArvoreRepli.Entities do
   def change_entity(%Entity{} = entity, attrs \\ %{}) do
     Entity.changeset(entity, attrs)
   end
-
 end

@@ -21,7 +21,12 @@ defmodule ArvoreRepli.EntitiesTest do
     end
 
     test "create_entity/1 with valid data creates a entity" do
-      valid_attrs = %{entity_type: "some entity_type", inep: "some inep", name: "some name", parent_id: 42}
+      valid_attrs = %{
+        entity_type: "some entity_type",
+        inep: "some inep",
+        name: "some name",
+        parent_id: 42
+      }
 
       assert {:ok, %Entity{} = entity} = Entities.create_entity(valid_attrs)
       assert entity.entity_type == "some entity_type"
@@ -36,7 +41,13 @@ defmodule ArvoreRepli.EntitiesTest do
 
     test "update_entity/2 with valid data updates the entity" do
       entity = entity_fixture()
-      update_attrs = %{entity_type: "some updated entity_type", inep: "some updated inep", name: "some updated name", parent_id: 43}
+
+      update_attrs = %{
+        entity_type: "some updated entity_type",
+        inep: "some updated inep",
+        name: "some updated name",
+        parent_id: 43
+      }
 
       assert {:ok, %Entity{} = entity} = Entities.update_entity(entity, update_attrs)
       assert entity.entity_type == "some updated entity_type"

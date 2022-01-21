@@ -27,7 +27,6 @@ defmodule ArvoreRepliWeb.Router do
     end
   end
 
-
   # Enables the Swoosh mailbox preview in development.
   #
   # Note that preview only shows emails that were sent by the same

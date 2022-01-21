@@ -21,4 +21,12 @@ defmodule ArvoreRepliWeb.FallbackController do
     |> put_view(ArvoreRepliWeb.ErrorView)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :"400"}) do
+    conn
+    |> put_status(400)
+    |> put_view(ArvoreRepliWeb.ErrorView)
+    |> render(:"400")
+  end
+
 end
