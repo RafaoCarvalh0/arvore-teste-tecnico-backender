@@ -13,10 +13,11 @@ defmodule ArvoreRepliWeb.EntityController do
 
   def create(conn, %{"entity" => entity_params}) do
     type = entity_params["entity_type"]
+    exists = Entities.get_parent_id!(entity_params["parent_id"])
 
     cond do
       type == "network" or type == "school" or
-          (type == "class" and entity_params["parent_id"] != nil) ->
+          (type == "class" and !is_nil(entity_params["parent_id"]) and !is_nil(exists)) ->
         with {:ok, %Entity{} = entity} <- Entities.create_entity(entity_params) do
           conn
           |> put_status(:created)
@@ -41,10 +42,11 @@ defmodule ArvoreRepliWeb.EntityController do
   def update(conn, %{"id" => id, "entity" => entity_params}) do
     entity = Entities.get_entity!(id)
     type = entity_params["entity_type"]
+    exists = Entities.get_parent_id!(entity_params["parent_id"])
 
     cond do
       type == "network" or type == "school" or
-          (type == "class" and entity_params["parent_id"] != nil) ->
+          (type == "class" and !is_nil(entity_params["parent_id"]) and !is_nil(exists)) ->
         with {:ok, %Entity{} = entity} <- Entities.update_entity(entity, entity_params) do
           render(conn, "entity.json",
             entity: entity,

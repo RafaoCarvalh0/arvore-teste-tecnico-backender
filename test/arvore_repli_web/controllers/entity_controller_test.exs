@@ -17,6 +17,12 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
     name: "some name",
     parent_id: nil
   }
+  @class_attrs_parent_id_9999 %{
+    entity_type: "class",
+    inep: "some inep",
+    name: "some name",
+    parent_id: 9999
+  }
   @update_attrs %{
     entity_type: "some updated entity_type",
     inep: "some updated inep",
@@ -51,6 +57,16 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
       conn: conn
     } do
       conn = post(conn, Routes.entity_path(conn, :create), entity: @class_attrs_parent_id_null)
+
+      assert %{
+               "detail" => "Bad Request"
+             } = json_response(conn, 400)["errors"]
+    end
+
+    test "Bad Request (400) when entity_type = class and parent_id does not exists in database", %{
+      conn: conn
+    } do
+      conn = post(conn, Routes.entity_path(conn, :create), entity: @class_attrs_parent_id_9999)
 
       assert %{
                "detail" => "Bad Request"
@@ -125,12 +141,26 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
       conn: conn,
       entity: entity
     } do
-      conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @class_attrs_parent_id_null)
+      conn =
+        put(conn, Routes.entity_path(conn, :update, entity), entity: @class_attrs_parent_id_null)
 
       assert %{
                "detail" => "Bad Request"
              } = json_response(conn, 400)["errors"]
     end
+
+    test "Bad Request (400) when entity_type = class and parent_id does not exists in database", %{
+      conn: conn,
+      entity: entity
+    } do
+      conn =
+        put(conn, Routes.entity_path(conn, :update, entity), entity: @class_attrs_parent_id_9999)
+
+      assert %{
+               "detail" => "Bad Request"
+             } = json_response(conn, 400)["errors"]
+    end
+
   end
 
   describe "delete entity" do

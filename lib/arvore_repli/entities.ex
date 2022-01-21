@@ -49,10 +49,28 @@ defmodule ArvoreRepli.Entities do
       {:error, %Ecto.Changeset{}}
 
   """
+  def get_parent_id!(id) do
+    if is_nil(id) do
+      nil
+    else
+      query =
+        from e in "entities",
+          where: e.id == ^id,
+          select: e.id
+
+      exists = Repo.all(query)
+
+      if exists == [] do
+        nil
+      else
+        exists
+      end
+    end
+  end
 
   def get_subtree!(id, entity_type) do
     cond do
-      id.parent_id == nil and entity_type != "network" ->
+      is_nil(id.parent_id) and entity_type != "network" ->
         []
 
       entity_type == "network" ->
