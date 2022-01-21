@@ -13,20 +13,19 @@ defmodule ArvoreRepliWeb.EntityController do
 
   def create(conn, %{"entity" => entity_params}) do
     type = entity_params["entity_type"]
-    if type == "network" or type == "school" or type ==  "class" do
-        with {:ok, %Entity{} = entity} <- Entities.create_entity(entity_params) do
-          conn
-          |> put_status(:created)
-          |> put_resp_header("location", Routes.entity_path(conn, :show, entity))
-          |> render("entity.json",
-            entity: entity,
-            subtree: Entities.get_subtree!(entity, entity.entity_type)
-          )
-        end
 
-      else
-        {:error, :"400"}
-
+    if type == "network" or type == "school" or type == "class" do
+      with {:ok, %Entity{} = entity} <- Entities.create_entity(entity_params) do
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", Routes.entity_path(conn, :show, entity))
+        |> render("entity.json",
+          entity: entity,
+          subtree: Entities.get_subtree!(entity, entity.entity_type)
+        )
+      end
+    else
+      {:error, :"400"}
     end
   end
 
@@ -40,7 +39,7 @@ defmodule ArvoreRepliWeb.EntityController do
     entity = Entities.get_entity!(id)
     type = entity_params["entity_type"]
 
-    if type == "network" or type == "school" or type ==  "class" do
+    if type == "network" or type == "school" or type == "class" do
       with {:ok, %Entity{} = entity} <- Entities.update_entity(entity, entity_params) do
         render(conn, "entity.json",
           entity: entity,

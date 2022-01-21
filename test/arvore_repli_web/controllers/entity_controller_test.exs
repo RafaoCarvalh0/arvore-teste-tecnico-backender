@@ -35,9 +35,10 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
       conn: conn
     } do
       conn = post(conn, Routes.entity_path(conn, :create), entity: @create_attrs)
+
       assert %{
-          "detail" => "Bad Request"
-      } = json_response(conn, 400)["errors"]
+               "detail" => "Bad Request"
+             } = json_response(conn, 400)["errors"]
     end
 
     @doc """
@@ -98,9 +99,10 @@ defmodule ArvoreRepliWeb.EntityControllerTest do
       entity: entity
     } do
       conn = put(conn, Routes.entity_path(conn, :update, entity), entity: @update_attrs)
+
       assert %{
-        "detail" => "Bad Request"
-      } = json_response(conn, 400)["errors"]
+               "detail" => "Bad Request"
+             } = json_response(conn, 400)["errors"]
     end
   end
 

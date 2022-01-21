@@ -28,5 +28,4 @@ defmodule ArvoreRepliWeb.FallbackController do
     |> put_view(ArvoreRepliWeb.ErrorView)
     |> render(:"400")
   end
-
 end

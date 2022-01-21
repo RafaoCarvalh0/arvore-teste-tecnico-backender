@@ -52,7 +52,7 @@ defmodule ArvoreRepli.Entities do
 
   def get_subtree!(id, entity_type) do
     cond do
-      id.parent_id == nil and entity_type != "network"->
+      id.parent_id == nil and entity_type != "network" ->
         []
 
       entity_type == "network" ->
@@ -81,7 +81,6 @@ defmodule ArvoreRepli.Entities do
             select: e.id
 
         Repo.all(query)
-
     end
   end
 
