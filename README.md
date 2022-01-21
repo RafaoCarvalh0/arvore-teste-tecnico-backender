@@ -29,7 +29,7 @@ A modelagem deverá utilizar apenas uma entidade (Entity), que poderá represent
 
 ### Iniciando o servidor
 #### Com todo o ambiente preparado (Elixir + MySQL), faça:
-  * 1. Clone o diretório
+  * 1. Clone o projeto
   * 2. Na raiz do projeto, execute `mix deps.get` para instalar todas as dependências
   * 3. Ainda na raiz do projeto, abra e configure o arquivo `.env` (instruções contidas no próprio arquivo)
   * 4. Após configurado o arquivo `.env` crie e migre o banco de dados com `mix ecto.setup` (na raiz do projeto)
@@ -165,4 +165,6 @@ Response:
 	}
 }
 ```
+
+**OBS: Para utilizar as rotas localmente, basta alterar o endereço http para localhost:4000**
 
